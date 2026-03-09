@@ -11,7 +11,7 @@ function pingProblemControllerCheck(req, res, next) {
     } catch (error) {
         next(error) // pass to errorhandler the next middleware
     }
-    
+
     
 }
 
