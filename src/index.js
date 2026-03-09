@@ -2,6 +2,7 @@ const express = require("express")
 const { PORT } = require('./config/server.config')
 
 const apiRouter = require('./routes/index')
+const errorHandler = require("./utils/errorHandler")
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.text())
 app.use("/api",apiRouter)
 
 
+app.use(errorHandler)
 app.listen(PORT , () => {
     console.log(`SERVER started at : ${PORT}`);
 })

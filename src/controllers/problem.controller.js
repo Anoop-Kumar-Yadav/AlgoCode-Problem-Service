@@ -1,10 +1,18 @@
 const { StatusCodes } = require('http-status-codes')
 
+const NotImplemented = require('../errors/notImplemented.error')
+
 // Executes on request : /api/v1/problems/ping
-function pingProblemControllerCheck(req, res) {
-    return res.json({
-        message : "ping Controller is Up!"
-    })
+function pingProblemControllerCheck(req, res, next) {
+    try {
+        throw new NotImplemented('pingProblemControllerCheck')
+    } catch (error) {
+        next(error) // pass to errorhandler the next middleware
+    }
+    
+    // return res.json({
+    //     message : "ping Controller is Up!"
+    // })
 }
 
 function addProblem(req, res) {
