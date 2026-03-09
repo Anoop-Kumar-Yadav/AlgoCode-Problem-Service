@@ -1,4 +1,4 @@
-
+// Executes on request : /api/v1/problems/ping
 function pingProblemControllerCheck(req, res) {
     return res.json({
         message : "ping Controller is Up!"
