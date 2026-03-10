@@ -1,3 +1,4 @@
+const NotFound = require("../errors/notFound.error");
 const sanitizeMarkdown = require("../utils/markdownSanitizer");
 
 class ProblemService {
@@ -31,6 +32,20 @@ class ProblemService {
       const problems = await this.problemRepository.getProblems()
       return problems
     
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async deleteProblem(id) {
+    try {
+      const deletedProblem = await this.problemRepository.deleteProblem(id)      
+      
+      if (deletedProblem === null) {
+        throw new NotFound
+      }
+      return deletedProblem
+
     } catch (error) {
       throw error
     }

@@ -48,7 +48,6 @@ async function getProblem(req, res, next) {
 async function getProblems(req, res, next) {
     try {
         const problems = await problemService.getProblems()
-        console.log(problems);
         
         return res.status( StatusCodes.OK ).json({
             success: true,
@@ -61,9 +60,15 @@ async function getProblems(req, res, next) {
     }
 }
 
-function deleteProblem(req, res, next) {
+async function deleteProblem(req, res, next) {
     try {
-        throw new NotImplemented('deleteProblem')
+        const deletedProblem = await problemService.deleteProblem(req.params.id)
+        
+        return res.status( StatusCodes.OK ).json({
+            success: `Deleted - ${deletedProblem._id}` ,
+            error: {},
+            data: deletedProblem
+        })
     } catch (error) {
         next(error) // pass to errorhandler the next middleware
     }

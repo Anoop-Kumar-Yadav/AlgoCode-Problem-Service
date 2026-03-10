@@ -4,7 +4,6 @@ const { StatusCodes } = require('http-status-codes')
 function errorHandler(err, req, res, next) {
 
     if (err instanceof BaseError) {
-        console.log('Custom----------------');
         
         return res.status(err.statusCode).json({
             success : false,
