@@ -17,8 +17,19 @@ problemRouter(/api/v1/problems)
 problemController(/api/v1/problems/ping)                
     |
     |
-service layer  
-
+service layer
+    |  |
+    |  | EXPOSE FUCNTIONALITY TO REQUEST TO DB
+    |  |
+Repository Layer(/api/v1/problems/ping)                
+    |  |
+    |  | PROVIDE ABSTRACTION OVER Databse 
+    |  |
+ORM / ODM (mongoose) 
+    |  |
+    |  | 
+    |  |
+  DATABBASE
  ```
 
 \- Here **problemController** is final middleware , have special thing about that it talks with **service layer** and get the work done and transfer back the response in the corresponding middleware chain.
