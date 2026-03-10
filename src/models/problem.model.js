@@ -33,5 +33,6 @@ const problemSchema = new mongoose.Schema({
 });
 
 const Problem = mongoose.model('Problem',problemSchema)
+// It takes the blueprint and turns it into a functional JavaScript class that can interact directly with your database.
 
 module.exports = Problem
