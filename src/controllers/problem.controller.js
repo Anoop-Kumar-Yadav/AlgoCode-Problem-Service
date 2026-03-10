@@ -20,7 +20,7 @@ async function addProblem(req, res, next) {
     try {
         const newProblem = await problemService.createProblem(req.body)
         
-        return res.status( 200 ).json({
+        return res.status( StatusCodes.OK ).json({
             success: true,
             message: "Successfully created a new problem",
             error: {},
@@ -31,17 +31,31 @@ async function addProblem(req, res, next) {
     }
 }
 
-function getProblem(req, res, next) {
+async function getProblem(req, res, next) {
     try {
-        throw new NotImplemented('getProblem')
+        const problem = await problemService.getProblem(req.params.id)
+        return res.status( StatusCodes.OK ).json({
+            success: true,
+            message: `Get a problem - ${problem.title}` ,
+            error: {},
+            data: problem
+        })
     } catch (error) {
         next(error) // pass to errorhandler the next middleware
     }   
 }
 
-function getProblems(req, res, next) {
+async function getProblems(req, res, next) {
     try {
-        throw new NotImplemented('getProblems')
+        const problems = await problemService.getProblems()
+        console.log(problems);
+        
+        return res.status( StatusCodes.OK ).json({
+            success: true,
+            message: `Get all problems` ,
+            error: {},
+            data: problems
+        })
     } catch (error) {
         next(error) // pass to errorhandler the next middleware
     }

@@ -13,7 +13,6 @@ function errorHandler(err, req, res, next) {
             data : {}
         })
     }
-    console.log('Default----------------');
     console.log(err);
     
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
