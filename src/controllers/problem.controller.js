@@ -74,6 +74,20 @@ async function deleteProblem(req, res, next) {
     }
 }
 
+async function addTestCase(req, res, next) {
+    try {
+        
+        const updatedProblem = await problemService.addTestCase(req.params.id,req.body)
+        return res.status( StatusCodes.OK ).json({
+            success: `Update - ${updatedProblem._id}` ,
+            error: {},
+            data: updatedProblem
+        })
+    } catch (error) {
+        next(error) // pass to errorhandler the next middleware
+    }
+}
+
 async function updateProblem(req, res, next) {
     try {
         const updatedProblem = await problemService.updateProblem(req.params.id,req.body)
@@ -94,6 +108,7 @@ module.exports = {
     getProblems,
     deleteProblem,
     updateProblem,
+    addTestCase,
 
     pingProblemControllerCheck
 }

@@ -14,6 +14,8 @@ problemRouter.post('/',problemController.addProblem)
 problemRouter.delete('/:id',problemController.deleteProblem)
 problemRouter.put('/:id',problemController.updateProblem)
 
+problemRouter.put('/testcases/:id',problemController.addTestCase)
+
 
 
 module.exports = problemRouter
