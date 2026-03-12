@@ -50,6 +50,20 @@ class ProblemService {
       throw error
     }
   }
+
+  async updateProblem(id,updatedFieldValueObject) {
+    try {
+      const updatedProblem = await this.problemRepository.updateProblem(id,updatedFieldValueObject)      
+      
+      if (updatedProblem === null) {
+        throw new NotFound('Problem not found')
+      }
+      return updatedProblem
+
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 module.exports = ProblemService;

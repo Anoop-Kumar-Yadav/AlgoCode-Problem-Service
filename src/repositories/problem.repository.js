@@ -37,6 +37,16 @@ class ProblemRepository {
       throw NotFound;
     }
   }
+
+  async updateProblem(id , updatedFieldValueObject) {
+    try {
+      const updatedDoc = await Problem.findByIdAndUpdate(id,{$set : updatedFieldValueObject},{returnDocument: true});
+      return updatedDoc
+
+    } catch (error) {
+      throw NotFound;
+    }
+  }
 }
 
 module.exports = ProblemRepository;
