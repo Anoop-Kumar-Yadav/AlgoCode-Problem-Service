@@ -1,114 +1,119 @@
-const { StatusCodes, INTERNAL_SERVER_ERROR } = require('http-status-codes')
-const NotImplemented = require('../errors/notImplemented.error')
-const { ProblemService } = require('../services/')
-const { ProblemRepository } = require('../repositories/')
+const { StatusCodes, INTERNAL_SERVER_ERROR } = require("http-status-codes");
+const NotImplemented = require("../errors/notImplemented.error");
+const { ProblemService } = require("../services/");
+const { ProblemRepository } = require("../repositories/");
 
-const problemService = new  ProblemService(new ProblemRepository)
+const problemService = new ProblemService(new ProblemRepository());
 
 // Executes on request : /api/v1/problems/ping
 function pingProblemControllerCheck(req, res, next) {
-    try {
-        return res.json({
-        message : "ping Controller is Up!"
-    })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    return res.status(200).json({
+      message: "ping Controller is Up!",
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function addProblem(req, res, next) {
-    try {
-        const newProblem = await problemService.createProblem(req.body)
-        
-        return res.status( StatusCodes.OK ).json({
-            success: true,
-            message: "Successfully created a new problem",
-            error: {},
-            data: newProblem
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    const newProblem = await problemService.createProblem(req.body);
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: "Successfully created a new problem",
+      error: {},
+      data: newProblem,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function getProblem(req, res, next) {
-    try {
-        const problem = await problemService.getProblem(req.params.id)
-        return res.status( StatusCodes.OK ).json({
-            success: true,
-            message: `Get a problem - ${problem.title}` ,
-            error: {},
-            data: problem
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }   
+  try {
+    const problem = await problemService.getProblem(req.params.id);
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: `Get a problem - ${problem.title}`,
+      error: {},
+      data: problem,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function getProblems(req, res, next) {
-    try {
-        const problems = await problemService.getProblems()
-        
-        return res.status( StatusCodes.OK ).json({
-            success: true,
-            message: `Get all problems` ,
-            error: {},
-            data: problems
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    const problems = await problemService.getProblems();
+
+    return res.status(StatusCodes.OK).json({
+      success: true,
+      message: `Get all problems`,
+      error: {},
+      data: problems,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function deleteProblem(req, res, next) {
-    try {
-        const deletedProblem = await problemService.deleteProblem(req.params.id)
-        
-        return res.status( StatusCodes.OK ).json({
-            success: `Deleted - ${deletedProblem._id}` ,
-            error: {},
-            data: deletedProblem
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    const deletedProblem = await problemService.deleteProblem(req.params.id);
+
+    return res.status(StatusCodes.OK).json({
+      success: `Deleted - ${deletedProblem._id}`,
+      error: {},
+      data: deletedProblem,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function addTestCase(req, res, next) {
-    try {
-        
-        const updatedProblem = await problemService.addTestCase(req.params.id,req.body)
-        return res.status( StatusCodes.OK ).json({
-            success: `Update - ${updatedProblem._id}` ,
-            error: {},
-            data: updatedProblem
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    const updatedProblem = await problemService.addTestCase(
+      req.params.id,
+      req.body,
+    );
+    return res.status(StatusCodes.OK).json({
+      success: `Update - ${updatedProblem._id}`,
+      error: {},
+      data: updatedProblem,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 async function updateProblem(req, res, next) {
-    try {
-        const updatedProblem = await problemService.updateProblem(req.params.id,req.body)
-        
-        return res.status( StatusCodes.OK ).json({
-            success: `Update - ${updatedProblem._id}` ,
-            error: {},
-            data: updatedProblem
-        })
-    } catch (error) {
-        next(error) // pass to errorhandler the next middleware
-    }
+  try {
+    const updatedProblem = await problemService.updateProblem(
+      req.params.id,
+      req.body,
+    );
+
+    return res.status(StatusCodes.OK).json({
+      success: `Update - ${updatedProblem._id}`,
+      error: {},
+      data: updatedProblem,
+    });
+  } catch (error) {
+    next(error); // pass to errorhandler the next middleware
+  }
 }
 
 module.exports = {
-    addProblem,
-    getProblem,
-    getProblems,
-    deleteProblem,
-    updateProblem,
-    addTestCase,
+  addProblem,
+  getProblem,
+  getProblems,
+  deleteProblem,
+  updateProblem,
+  addTestCase,
 
-    pingProblemControllerCheck
-}
+  pingProblemControllerCheck,
+};
